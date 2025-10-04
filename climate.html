@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Guardian - Global Earth Health Monitor</title>
+    <link rel="stylesheet" href="climate.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🌍</span>
+                <span class="logo-text">Climate Guardian</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#dashboard" class="nav-link">Live Data</a></li>
+                <li><a href="#simulations" class="nav-link">Simulations</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="index.html" class="nav-lin" id="backk">Back to Cosmos E</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="earth-loader"></div>
+            <p>Connecting to NASA satellites...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Section - 3D Earth Storytelling -->
+    <section id="home" class="section home-section">
+        <div class="hero-container">
+            <div class="earth-container">
+                <div class="earth">
+                    <div class="earth-surface"></div>
+                    <div class="atmosphere"></div>
+                    <div class="data-points">
+                        <div class="data-point wildfire" style="top: 30%; left: 20%;"></div>
+                        <div class="data-point temperature" style="top: 60%; right: 25%;"></div>
+                        <div class="data-point ice-melt" style="top: 15%; left: 50%;"></div>
+                        <div class="data-point co2" style="bottom: 30%; right: 30%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-content">
+                <div class="story-chapter active" data-chapter="1">
+                    <h1 class="hero-title">Climate Guardian</h1>
+                    <p class="hero-subtitle">Real-time Earth Health Monitoring</p>
+                    <p class="hero-description">Powered by NASA's Earth Observation System</p>
+                    <div class="scroll-indicator">
+                        <span>Scroll to explore</span>
+                        <div class="scroll-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="story-chapter" data-chapter="2">
+                    <h2>Rising Temperatures</h2>
+                    <p>Global temperatures have risen by <span class="highlight" id="temp-anomaly">1.1°C</span> since pre-industrial times.</p>
+                    <div class="climate-stat">
+                        <div class="stat-number" id="current-temp">Loading...</div>
+                        <div class="stat-label">Current Global Temperature Anomaly</div>
+                    </div>
+                </div>
+
+                <div class="story-chapter" data-chapter="3">
+                    <h2>Wildfire Activity</h2>
+                    <p>NASA FIRMS detects <span class="highlight" id="fire-count">Loading...</span> active fires worldwide today.</p>
+                    <div class="climate-stat">
+                        <div class="stat-number" id="total-fires">Loading...</div>
+                        <div class="stat-label">Active Wildfires Detected</div>
+                    </div>
+                </div>
+
+                <div class="story-chapter" data-chapter="4">
+                    <h2>CO₂ Levels</h2>
+                    <p>Atmospheric CO₂ concentration has reached <span class="highlight" id="co2-level">420 ppm</span>.</p>
+                    <div class="climate-stat">
+                        <div class="stat-number" id="current-co2">Loading...</div>
+                        <div class="stat-label">Parts Per Million (PPM)</div>
+                    </div>
+                </div>
+
+                <div class="story-chapter" data-chapter="5">
+                    <h2>Take Action</h2>
+                    <p>Together, we can monitor and protect our planet's future.</p>
+                    <button class="cta-button" onclick="scrollToSection('dashboard')">
+                        Explore Live Data
+                        <span class="button-glow"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="particles"></div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section dashboard-section">
+        <div class="container">
+            <h2 class="section-title">Live Climate Data</h2>
+            <p class="section-subtitle">Real-time updates from NASA's Earth Observation System</p>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card temperature-card">
+                    <div class="card-icon">🌡️</div>
+                    <h3>Global Temperature</h3>
+                    <div class="metric-value" id="dashboard-temp">Loading...</div>
+                    <div class="metric-change" id="temp-change">+0.8°C vs 1900</div>
+                    <div class="metric-chart" id="temp-chart"></div>
+                </div>
+
+                <div class="dashboard-card co2-card">
+                    <div class="card-icon">💨</div>
+                    <h3>CO₂ Concentration</h3>
+                    <div class="metric-value" id="dashboard-co2">Loading...</div>
+                    <div class="metric-change" id="co2-change">+2.4 ppm/year</div>
+                    <div class="metric-chart" id="co2-chart"></div>
+                </div>
+
+                <div class="dashboard-card wildfire-card">
+                    <div class="card-icon">🔥</div>
+                    <h3>Active Wildfires</h3>
+                    <div class="metric-value" id="dashboard-fires">Loading...</div>
+                    <div class="metric-change" id="fire-change">Last 24 hours</div>
+                    <div class="wildfire-map" id="fire-map"></div>
+                </div>
+
+                <div class="dashboard-card ice-card">
+                    <div class="card-icon">🧊</div>
+                    <h3>Arctic Sea Ice</h3>
+                    <div class="metric-value" id="dashboard-ice">Loading...</div>
+                    <div class="metric-change" id="ice-change">vs 1981-2010 avg</div>
+                    <div class="ice-visualization" id="ice-viz"></div>
+                </div>
+            </div>
+
+            <div class="earth-image-container">
+                <h3>Today's Earth from Space</h3>
+                <div class="earth-image-wrapper">
+                    <img id="earth-image" src="" alt="Earth from space" />
+                    <div class="image-loader">Loading today's Earth image...</div>
+                </div>
+                <p class="image-caption">Real-time imagery courtesy of NASA's EPIC camera</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Simulations Section -->
+    <section id="simulations" class="section simulations-section">
+        <div class="container">
+            <h2 class="section-title">Climate Simulations</h2>
+            <p class="section-subtitle">Explore future climate scenarios</p>
+
+            <div class="simulation-controls">
+                <div class="scenario-selector">
+                    <button class="scenario-btn active" data-scenario="current">Current Trends</button>
+                    <button class="scenario-btn" data-scenario="2x-co2">Double CO₂</button>
+                    <button class="scenario-btn" data-scenario="ice-melt">Ice Melt</button>
+                    <button class="scenario-btn" data-scenario="deforestation">Deforestation</button>
+                </div>
+            </div>
+
+            <div class="simulation-display">
+                <div class="simulation-earth" id="sim-earth">
+                    <div class="sim-earth-surface"></div>
+                    <div class="sim-effects">
+                        <div class="temperature-overlay"></div>
+                        <div class="sea-level-overlay"></div>
+                        <div class="forest-overlay"></div>
+                    </div>
+                </div>
+                <div class="simulation-info" id="sim-info">
+                    <h3>Current Climate Scenario</h3>
+                    <p>Earth's current climate with ongoing trends and changes.</p>
+                    <div class="sim-stats">
+                        <div class="sim-stat">
+                            <span class="stat-value">+1.1°C</span>
+                            <span class="stat-label">Temperature Rise</span>
+                        </div>
+                        <div class="sim-stat">
+                            <span class="stat-value">420ppm</span>
+                            <span class="stat-label">CO₂ Level</span>
+                        </div>
+                        <div class="sim-stat">
+                            <span class="stat-value">23cm</span>
+                            <span class="stat-label">Sea Level Rise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h3>Climate Knowledge Quiz</h3>
+                <div class="quiz-container" id="quiz-container">
+                    <div class="quiz-question" id="quiz-question">Loading question...</div>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <div class="quiz-score">Score: <span id="quiz-score">0</span>/10</div>
+                </div>
+                <button class="quiz-btn" id="quiz-start">Start Quiz</button>
+            </div>
+
+            <div class="carbon-calculator">
+                <h3>Personal Carbon Footprint Calculator</h3>
+                <div class="calculator-form">
+                    <div class="input-group">
+                        <label>Transportation (miles/year):</label>
+                        <input type="number" id="transport" placeholder="12000">
+                    </div>
+                    <div class="input-group">
+                        <label>Electricity (kWh/month):</label>
+                        <input type="number" id="electricity" placeholder="900">
+                    </div>
+                    <div class="input-group">
+                        <label>Diet type:</label>
+                        <select id="diet">
+                            <option value="mixed">Mixed diet</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                        </select>
+                    </div>
+                    <button class="calc-button" onclick="calculateFootprint()">Calculate Impact</button>
+                </div>
+                <div class="footprint-result" id="footprint-result"></div>
+                <div class="footprint-visualization" id="footprint-viz"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">About Climate Guardian</h2>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🛰️</div>
+                    <h3>NASA Partnership</h3>
+                    <p>We leverage NASA's Earth Observation System, including satellites like MODIS, Landsat, and EPIC to provide real-time climate data.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">🌐</div>
+                    <h3>Global Coverage</h3>
+                    <p>Our platform monitors climate indicators across all continents, providing comprehensive Earth health insights 24/7.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">📊</div>
+                    <h3>Real-time Data</h3>
+                    <p>All metrics update continuously using NASA's live data feeds, ensuring you have the most current climate information.</p>
+                </div>
+            </div>
+
+            <div class="data-sources">
+                <h3>Data Sources</h3>
+                <div class="sources-grid">
+                    <div class="source-item">
+                        <strong>NASA GISS</strong>
+                        <span>Global temperature data</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>NASA FIRMS</strong>
+                        <span>Fire Information for Resource Management</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>NASA EPIC</strong>
+                        <span>Earth Polychromatic Imaging Camera</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>NSIDC</strong>
+                        <span>National Snow and Ice Data Center</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>NOAA Mauna Loa</strong>
+                        <span>CO₂ concentration measurements</span>
+                    </div>
+                    <div class="source-item">
+                        <strong>NASA POWER</strong>
+                        <span>Prediction of Worldwide Energy Resources</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mission-statement">
+                <h3>Our Mission</h3>
+                <p>Climate Guardian transforms complex NASA climate data into accessible, interactive experiences that inspire action and awareness about our planet's health. By making Earth observation data more engaging and understandable, we empower individuals and communities to make informed decisions for a sustainable future.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Progress Tracker -->
+    <div class="progress-tracker" id="progress-tracker">
+        <div class="progress-title">Your Climate Journey</div>
+        <div class="progress-stats">
+            <div class="progress-item">
+                <span class="progress-number" id="user-streak">0</span>
+                <span class="progress-label">Day Streak</span>
+            </div>
+            <div class="progress-item">
+                <span class="progress-number" id="user-badges">0</span>
+                <span class="progress-label">Badges</span>
+            </div>
+        </div>
+        <div class="badges-container" id="badges-container"></div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <span>↑</span>
+    </button>
+
+    <script src="climate.js"></script>
+</body>
+</html>

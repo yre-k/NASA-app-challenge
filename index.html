@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos Explorer - Journey Through Space</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMxZTI5M2IiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjM5NmZmIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMyIgZmlsbD0iIzYzOTZmZiIvPgo8L3N2Zz4K">
+    <meta name="description" content="Explore the cosmos with live NASA data, immersive 3D experiences, and educational storytelling">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="loading-screen">
+            <div class="loading-content">
+                <div class="logo-container">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojNjM5NmZmO3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNhODU1ZjA7c3RvcC1vcGFjaXR5OjEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQpIi8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iMC44Ii8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iMC42Ii8+CjxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjgiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+" alt="Cosmos Explorer Logo" class="logo">
+                </div>
+                <h1 class="loading-title">Cosmos Explorer</h1>
+                <div class="loading-progress">
+                    <div class="loading-bar"></div>
+                </div>
+                <p class="loading-text">Initializing cosmic journey...</p>
+            </div>
+        </div>
+
+        <!-- Onboarding Modal -->
+        <div id="onboarding-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-content">
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+                <h2 id="modal-title">Welcome to Cosmos Explorer</h2>
+                <div class="onboarding-content">
+                    <div class="onboarding-section">
+                        <h3>🌌 Navigation</h3>
+                        <p>Use your mouse to explore interactive elements. Scroll to navigate through Story Mode chapters.</p>
+                    </div>
+                    <div class="onboarding-section">
+                        <h3>🎵 Audio Experience</h3>
+                        <p>Toggle immersive ambient sounds and narration using the audio controls.</p>
+                    </div>
+                    <div class="onboarding-section">
+                        <h3>⚡ Accessibility</h3>
+                        <p>Enable "Reduce Motion" in settings if you prefer minimal animations. All features are keyboard accessible.</p>
+                    </div>
+                    <div class="onboarding-section">
+                        <h3>🚀 Getting Started</h3>
+                        <p>Explore live NASA data in the Data Hub, or begin your cosmic journey in Story Mode.</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="start-journey">Begin Exploration</button>
+            </div>
+        </div>
+
+        <!-- Main Navigation -->
+        <nav id="main-nav" class="main-nav" role="navigation">
+            <div class="nav-brand">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzYzOTZmZjtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojYTg1NWYwO3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjIwIiBmaWxsPSJ1cmwoI2dyYWRpZW50MikiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjgiLz4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iNCIgZmlsbD0iI2ZmZmZmZiIvPgo8L3N2Zz4=" alt="Logo" class="nav-logo">
+                <span class="nav-title">Cosmos Explorer</span>
+            </div>
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#" role="menuitem" data-view="home" class="nav-link active">Home</a></li>
+                <li role="none"><a href="#" role="menuitem" data-view="data-hub" class="nav-link">Data Hub</a></li>
+                <li role="none"><a href="#" role="menuitem" data-view="story" class="nav-link">Story Mode</a></li>
+                <li role="none"><a href="#" role="menuitem" data-view="about" class="nav-link">About</a></li>
+                <li role="none"><a href="spaced.html" role="menuitem" class="nav-link" id="cou-r">SpaceEd Pro </a></li>
+                <li role="none"><a href="climate.html" role="menuitem" class="nav-link" id="cou-rr">Climate Guardian</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button id="audio-toggle" class="control-btn" aria-label="Toggle audio" title="Toggle Audio">
+                    <span class="audio-icon">🔇</span>
+                </button>
+                <button id="settings-toggle" class="control-btn" aria-label="Settings" title="Settings">
+                    <span class="settings-icon">⚙️</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Settings Panel -->
+        <div id="settings-panel" class="settings-panel" role="dialog" aria-hidden="true">
+            <div class="settings-content">
+                <h3>Settings</h3>
+                <div class="setting-group">
+                    <label for="reduce-motion" class="setting-label">
+                        <input type="checkbox" id="reduce-motion" class="setting-checkbox">
+                        Reduce Motion
+                    </label>
+                </div>
+                <div class="setting-group">
+                    <label for="volume-slider" class="setting-label">Volume</label>
+                    <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
+                    <span id="volume-value">50%</span>
+                </div>
+                <div class="setting-group">
+                    <label for="narration-toggle" class="setting-label">
+                        <input type="checkbox" id="narration-toggle" class="setting-checkbox">
+                        Voice Narration
+                    </label>
+                </div>
+                <button class="btn" id="clear-data">Clear Stored Data</button>
+            </div>
+        </div>
+
+        <!-- Audio Controls -->
+        <div id="audio-controls" class="audio-controls">
+            <button id="audio-play-pause" class="audio-btn" aria-label="Play/Pause">▶️</button>
+            <div class="audio-volume">
+                <span class="volume-icon">🔊</span>
+                <input type="range" id="audio-volume" class="audio-volume-slider" min="0" max="100" value="50">
+            </div>
+            <button id="audio-mute" class="audio-btn" aria-label="Mute">🔇</button>
+        </div>
+
+        <!-- Main Canvas -->
+        <canvas id="main-canvas" class="main-canvas" role="img" aria-label="Interactive 3D space visualization"></canvas>
+
+        <!-- Content Views -->
+        <div id="content-container" class="content-container">
+            <!-- Home View -->
+            <div id="home-view" class="view active">
+                <div class="hero-content">
+                    <h1 class="hero-title">Explore the Cosmos</h1>
+                    <p class="hero-subtitle">Journey through space with live NASA data and immersive 3D experiences</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" data-view="data-hub">Launch Data Hub</button>
+                        <button class="btn btn-secondary" data-view="story">Begin Story Mode</button>
+                    </div>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛰️</div>
+                        <h3>Live NASA Data</h3>
+                        <p>Real-time astronomy images, asteroid tracking, and ISS location</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌌</div>
+                        <h3>3D Story Mode</h3>
+                        <p>Interactive journey from Earth to deep space with cinematic transitions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎵</div>
+                        <h3>Immersive Audio</h3>
+                        <p>Ambient space sounds and narration enhance your cosmic experience</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Hub View -->
+            <div id="data-hub-view" class="view">
+                <div class="data-hub-header">
+                    <h2>NASA Data Hub</h2>
+                    <div class="data-status" id="data-status">
+                        <span class="status-indicator"></span>
+                        <span class="status-text">Loading...</span>
+                    </div>
+                </div>
+                <div class="data-grid">
+                    <div class="data-card" id="apod-card">
+                        <div class="data-card-header">
+                            <h3>Astronomy Picture of the Day</h3>
+                            <button class="expand-btn" aria-label="Expand APOD">⤢</button>
+                        </div>
+                        <div class="data-card-content">
+                            <div class="apod-image-container">
+                                <img id="apod-image" src="" alt="APOD Image" class="apod-image">
+                                <div class="apod-overlay">
+                                    <p id="apod-title" class="apod-title"></p>
+                                    <p id="apod-date" class="apod-date"></p>
+                                </div>
+                            </div>
+                            <p id="apod-explanation" class="apod-explanation"></p>
+                        </div>
+                    </div>
+                    <div class="data-card" id="neo-card">
+                        <div class="data-card-header">
+                            <h3>Near-Earth Objects</h3>
+                            <div class="neo-count" id="neo-count">Loading...</div>
+                        </div>
+                        <div class="data-card-content">
+                            <canvas id="neo-canvas" class="neo-canvas" width="400" height="300"></canvas>
+                            <div class="neo-list" id="neo-list"></div>
+                        </div>
+                    </div>
+                    <div class="data-card" id="iss-card">
+                        <div class="data-card-header">
+                            <h3>International Space Station</h3>
+                            <div class="iss-status" id="iss-status">Tracking...</div>
+                        </div>
+                        <div class="data-card-content">
+                            <canvas id="iss-canvas" class="iss-canvas" width="400" height="300"></canvas>
+                            <div class="iss-info" id="iss-info">
+                                <p>Latitude: <span id="iss-lat">--</span>°</p>
+                                <p>Longitude: <span id="iss-lon">--</span>°</p>
+                                <p>Altitude: ~408 km</p>
+                                <p>Speed: ~27,600 km/h</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-card" id="earth-card">
+                        <div class="data-card-header">
+                            <h3>Earth Observation</h3>
+                            <select id="earth-layer-select" class="layer-select">
+                                <option value="temperature">Temperature</option>
+                                <option value="fires">Active Fires</option>
+                                <option value="clouds">Cloud Cover</option>
+                            </select>
+                        </div>
+                        <div class="data-card-content">
+                            <canvas id="earth-canvas" class="earth-canvas" width="400" height="300"></canvas>
+                            <div class="earth-info" id="earth-info">
+                                <p>Data updates every 6 hours</p>
+                                <p>Source: NASA MODIS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story Mode View -->
+            <div id="story-view" class="view">
+                <div class="story-nav">
+                    <div class="chapter-indicator" id="chapter-indicator">
+                        <span class="chapter-number">1</span>
+                        <span class="chapter-title">Lift-Off</span>
+                    </div>
+                    <div class="story-controls">
+                        <button id="prev-chapter" class="story-btn" aria-label="Previous chapter">◀</button>
+                        <button id="play-pause-story" class="story-btn" aria-label="Play/Pause narration">⏸️</button>
+                        <button id="next-chapter" class="story-btn" aria-label="Next chapter">▶</button>
+                    </div>
+                </div>
+                <div class="story-content" id="story-content">
+                    <div class="chapter active" data-chapter="1">
+                        <div class="chapter-narration">
+                            <h2>Chapter 1: Lift-Off</h2>
+                            <p>"Every great journey begins with a single step — or in our case, a launch. Rockets break free from Earth's gravity, reaching speeds of 28,000 km/h to remain in orbit."</p>
+                        </div>
+                    </div>
+                    <div class="chapter" data-chapter="2">
+                        <div class="chapter-narration">
+                            <h2>Chapter 2: Orbit & Satellites</h2>
+                            <p>"Satellites are our eyes in the sky. From weather forecasting to navigation, thousands of satellites orbit Earth and shape modern life."</p>
+                        </div>
+                    </div>
+                    <div class="chapter" data-chapter="3">
+                        <div class="chapter-narration">
+                            <h2>Chapter 3: Deep Space Exploration</h2>
+                            <p>"Beyond Earth's orbit lies the unknown. Probes journey across the solar system, returning data that stretches human knowledge."</p>
+                        </div>
+                    </div>
+                    <div class="chapter" data-chapter="4">
+                        <div class="chapter-narration">
+                            <h2>Chapter 4: Galaxies & Beyond</h2>
+                            <p>"Our galaxy contains over 100 billion stars. It's only one among billions — a humbling scale of the cosmos."</p>
+                        </div>
+                    </div>
+                    <div class="chapter" data-chapter="5">
+                        <div class="chapter-narration">
+                            <h2>Chapter 5: Return to Earth</h2>
+                            <p>"After exploring the stars, we return home — a reminder that Earth is our only habitable world."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="story-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="story-progress-fill"></div>
+                    </div>
+                    <div class="chapter-dots">
+                        <div class="dot active" data-chapter="1"></div>
+                        <div class="dot" data-chapter="2"></div>
+                        <div class="dot" data-chapter="3"></div>
+                        <div class="dot" data-chapter="4"></div>
+                        <div class="dot" data-chapter="5"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About View -->
+            <div id="about-view" class="view">
+                <div class="about-content">
+                    <div class="about-header">
+                        <h2>About Cosmos Explorer</h2>
+                        <p class="about-subtitle">Connecting humanity with the universe through open data</p>
+                    </div>
+                    <div class="about-grid">
+                        <div class="about-card">
+                            <div class="about-icon">🔬</div>
+                            <h3>NASA Open Data</h3>
+                            <p>We utilize NASA's extensive collection of open-source astronomical data, images, and real-time feeds to bring space exploration to everyone. All data is freely available and continuously updated.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">🌍</div>
+                            <h3>Educational Mission</h3>
+                            <p>Our goal is to make space science accessible and engaging. Through immersive 3D experiences and real-time data visualization, we inspire curiosity about our universe.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">🚀</div>
+                            <h3>Technology</h3>
+                            <p>Built with modern web technologies including WebGL for 3D rendering, Web Audio API for immersive sound, and responsive design for any device.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">♿</div>
+                            <h3>Accessibility</h3>
+                            <p>Designed for everyone with keyboard navigation, screen reader support, reduced motion options, and clear visual contrast for an inclusive experience.</p>
+                        </div>
+                    </div>
+                    <div class="about-apis">
+                        <h3>Data Sources</h3>
+                        <ul>
+                            <li><strong>APOD API:</strong> Daily astronomy pictures with explanations</li>
+                            <li><strong>NEO Feed:</strong> Near-Earth object tracking and orbital data</li>
+                            <li><strong>ISS Location API:</strong> Real-time International Space Station position</li>
+                            <li><strong>Earth Imagery:</strong> Satellite observations of Earth's systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Snapshot Feature -->
+        <button id="snapshot-btn" class="snapshot-btn" aria-label="Capture snapshot" title="Capture and Download Snapshot">
+            📸
+        </button>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
